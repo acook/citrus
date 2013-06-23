@@ -1,4 +1,5 @@
 require File.expand_path('../helper', __FILE__)
+require File.expand_path('../../lib/citrus/object', __FILE__)
 
 class MatchTest < Test::Unit::TestCase
   def test_string_equality

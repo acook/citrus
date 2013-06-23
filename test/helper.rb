@@ -7,6 +7,10 @@ require 'citrus'
 class Test::Unit::TestCase
   include Citrus
 
+  def self.const_missing name
+    Citrus::Grammar.const_get name
+  end
+
   TestGrammar = Grammar.new do
     rule :alpha do
       /[a-zA-Z]/
