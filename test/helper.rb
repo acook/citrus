@@ -7,6 +7,7 @@ require 'citrus'
 class Test::Unit::TestCase
   include Citrus
 
+  # FIXME: Fix the code so we don't have to do this
   def self.const_missing name
     Citrus::Grammar.const_get name
   end

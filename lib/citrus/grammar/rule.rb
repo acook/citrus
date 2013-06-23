@@ -166,6 +166,7 @@ module Citrus
         match.extend(extension) if extension
       end
 
+      # FIXME: Make the code understand the Grammar namespace
       def self.const_missing(name)
         Citrus::Grammar.const_get name
       end

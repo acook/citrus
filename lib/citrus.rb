@@ -113,6 +113,7 @@ module Citrus
     found
   end
 
+  # FIXME: Make it so we don't have to do this anymore
   def self.const_missing name
     Grammar.const_get name
   end
