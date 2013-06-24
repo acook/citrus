@@ -23,7 +23,7 @@ I recommend looking at other options or write your own parser.
 - [Parslet](http://kschiess.github.io/parslet/)
 - [Treetop](https://github.com/nathansobo/treetop)
 - [Racc](https://github.com/tenderlove/racc)
-- <your parser here>
+- [your parser here]
 
 # Citrus :: Parsing Expressions for Ruby
 
