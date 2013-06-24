@@ -1,4 +1,31 @@
-Citrus :: Parsing Expressions for Ruby
+# Warning : Abandoned Project
+
+This is a fork of the original Citrus project (also abandoned).
+
+It splits the different objects (Classes/Modules) into their own files,
+and adds additional debugging methods (optional) to make things easier.
+
+Additionally there is actually some namespacing,
+but the original design makes this a difficult affair,
+there's a lot of tight coupling between objects at different levels.
+
+The multiple ways of defining grammars seems a waste,
+the "native" grammar specification format duplicates the Ruby DSL,
+and given that the recommended native format is the only one documented
+its a real shame that it doesn't support debugging the grammar files
+and worse, if something goes wrong Citrus might just crash entirely with
+no explanation. Also, you'll find a lot of two-letter variable names.
+
+I recommend looking at other options or write your own parser.
+
+## Alternatives
+
+- [Parslet](http://kschiess.github.io/parslet/)
+- [Treetop](https://github.com/nathansobo/treetop)
+- [Racc](https://github.com/tenderlove/racc)
+- <your parser here>
+
+# Citrus :: Parsing Expressions for Ruby
 
 Citrus is a compact and powerful parsing library for
 [Ruby](http://ruby-lang.org/) that combines the elegance and expressiveness of
