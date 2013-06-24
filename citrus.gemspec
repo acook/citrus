@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rake')
 
+  s.add_dependency('coderay')
+
   s.has_rdoc = true
   s.rdoc_options = %w< --line-numbers --inline-source --title Citrus --main Citrus >
   s.extra_rdoc_files = %w< README.md CHANGES >

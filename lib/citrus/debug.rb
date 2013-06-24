@@ -1,6 +1,24 @@
 require_relative '../citrus'
 
 module Citrus
+  module Debug
+    def self.capture
+      readme, writeme = IO.pipe
+      pid = fork do
+        $stdout.reopen writeme
+        readme.close
+
+        yield
+      end
+
+      writeme.close
+      output = readme.read
+      Process.waitpid(pid)
+
+      output
+    end
+  end
+
   module Grammar
     module GrammarMethods
       def debug_parse(string, options={})
@@ -35,6 +53,56 @@ module Citrus
       end
       #alias_method :old_parse, :parse
       #alias_method :parse, :debug_rule_parse
+    end
+  end
+
+  class Match
+    def color_debug_dump
+      output = debug_dump
+
+      CodeRay.scan(output, :ruby).encode CodeRay::Encoders::Terminal.new
+    end
+
+    def debug_dump(indent=' ')
+      lines = []
+      stack = []
+      offset = 0
+      close = false
+      index = 0
+      last_length = nil
+
+      while index < @events.size
+        event = @events[index]
+
+        if close
+          os = stack.pop
+          start = stack.pop
+          rule = stack.pop
+
+          space = indent * (stack.size / 3)
+          string = self.string.slice(os, event)
+          lines[start] = "#{space}#{string.inspect} rule: #{rule}, offset: #{os}, length: #{event}"
+
+          last_length = event unless last_length
+
+          close = false
+        elsif event == CLOSE
+          close = true
+        else
+          if last_length
+            offset += last_length
+            last_length = nil
+          end
+
+          stack << event
+          stack << index
+          stack << offset
+        end
+
+        index += 1
+      end
+
+      lines.compact.join("\n")
     end
   end
 end
